@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/bent10/rcfy/compare/v1.0.0...v1.0.1) (2022-05-15)
+
+
+### Bug Fixes
+
+* **gitignore:** git rm dist ([808dc12](https://github.com/bent10/rcfy/commit/808dc12cc8e3b42a2bf3f5978f11dbc73804ba7e))
+
 # 1.0.0 (2022-05-15)
 
 
