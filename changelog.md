@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/bent10/rcfy/compare/v1.0.2...v2.0.0) (2022-05-15)
+
+
+### Code Refactoring
+
+* renames core functions ([2a21332](https://github.com/bent10/rcfy/commit/2a21332af33e19ca963ddc80c8083fb197e6dfc7))
+
+
+### BREAKING CHANGES
+
+* renames `findConfig()` to `findRc()` and `loadConfig()` to `loadRc()`
+
 ## [1.0.2](https://github.com/bent10/rcfy/compare/v1.0.1...v1.0.2) (2022-05-15)
 
 
