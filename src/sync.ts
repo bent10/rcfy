@@ -18,9 +18,9 @@ function readPkgSync(prop: string): AnyConfig | undefined {
  * Finds runtime-configuration file synchronously.
  *
  * ```js
- * import { findConfigSync } from 'rcfy'
+ * import { findRcSync } from 'rcfy'
  *
- * const rcFile = findConfigSync('myproject', './config')
+ * const rcFile = findRcSync('myproject', './config')
  * // will finds:
  * // - `.myprojectrc` file in the `./config` directory.
  * // - `.myprojectrc.json` file in the `./config` directory.
@@ -29,7 +29,7 @@ function readPkgSync(prop: string): AnyConfig | undefined {
  * // - `myproject.config.{cjs,js}` file in the `./config` directory.
  * ```
  */
-export function findConfigSync(
+export function findRcSync(
   name: string,
   cwd = process.cwd()
 ): string | undefined {
@@ -53,9 +53,9 @@ export function findConfigSync(
  * Loads runtime-configuration file synchronously, with precedence.
  *
  * ```js
- * import { loadConfigSync } from 'rcfy'
+ * import { loadRcSync } from 'rcfy'
  *
- * const rc = loadConfigSync('myproject')
+ * const rc = loadRcSync('myproject')
  * // will try to loads config from:
  * // - `myproject` field in the `package.json` file.
  * // - `.myprojectrc` file in the `cwd`.
@@ -68,13 +68,13 @@ export function findConfigSync(
  * **Note:** Config that found in the `package.json` will be merged with
  * higher precedence.
  */
-export function loadConfigSync(
+export function loadRcSync(
   name: string,
   cwd = process.cwd(),
   ...args: any[]
 ): AnyConfig | Promise<AnyConfig> {
   const pkgConfig = readPkgSync(name)
-  const configFile = findConfigSync(name, cwd)
+  const configFile = findRcSync(name, cwd)
   let config = configFile ? loadFileSync(configFile, cwd, ...args) : {}
 
   if (

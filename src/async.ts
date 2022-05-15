@@ -18,9 +18,9 @@ async function readPkg(prop: string): Promise<AnyConfig | undefined> {
  * Finds runtime-configuration file.
  *
  * ```js
- * import { findConfig } from 'rcfy'
+ * import { findRc } from 'rcfy'
  *
- * const rcFile = await findConfig('myproject', './config')
+ * const rcFile = await findRc('myproject', './config')
  * // will finds:
  * // - `.myprojectrc` file in the `./config` directory.
  * // - `.myprojectrc.json` file in the `./config` directory.
@@ -29,7 +29,7 @@ async function readPkg(prop: string): Promise<AnyConfig | undefined> {
  * // - `myproject.config.{mjs,cjs,js}` file in the `./config` directory.
  * ```
  */
-export async function findConfig(
+export async function findRc(
   name: string,
   cwd = process.cwd()
 ): Promise<string | undefined> {
@@ -63,9 +63,9 @@ export async function findConfig(
  * Finds runtime-configuration file, with precedence.
  *
  * ```js
- * import { loadConfig } from 'rcfy'
+ * import { loadRc } from 'rcfy'
  *
- * const rc = await loadConfig('myproject')
+ * const rc = await loadRc('myproject')
  * // will try to loads config from:
  * // - `myproject` field in the `package.json` file.
  * // - `.myprojectrc` file in the `cwd`.
@@ -78,13 +78,13 @@ export async function findConfig(
  * **Note:** Config that found in the `package.json` will be merged with
  * higher precedence.
  */
-export async function loadConfig(
+export async function loadRc(
   name: string,
   cwd = process.cwd(),
   ...args: any[]
 ): Promise<AnyConfig> {
   const pkgConfig = await readPkg(name)
-  const configFile = await findConfig(name, cwd)
+  const configFile = await findRc(name, cwd)
   const config = configFile ? await loadFile(configFile, cwd, ...args) : {}
 
   if (

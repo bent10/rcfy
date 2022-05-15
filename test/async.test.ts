@@ -1,6 +1,6 @@
 import { resolve } from 'node:path'
 import anyTest, { TestFn } from 'ava'
-import { findConfig, loadConfig } from '../dist/index.js'
+import { findRc, loadRc } from '../dist/index.js'
 import { mock, mockFoo, Foo, context, type Context } from './utils.js'
 
 const test = anyTest as TestFn<Context>
@@ -9,29 +9,29 @@ test.before(t => {
   t.context = context
 })
 
-test('findConfig()', async t => {
-  const rcFile = await findConfig('prettier')
+test('findRc()', async t => {
+  const rcFile = await findRc('prettier')
 
   t.is(rcFile, resolve(process.cwd(), '.prettierrc'))
 })
 
-test('findConfig cwd', async t => {
-  const rcFile = await findConfig('foo', t.context.p1)
+test('findRc cwd', async t => {
+  const rcFile = await findRc('foo', t.context.p1)
 
   t.is(rcFile, resolve(t.context.p1, '.foorc'))
 })
 
-test('findConfig precedence', async t => {
-  const p1 = await findConfig('foo', t.context.p1)
-  const p2 = await findConfig('foo', t.context.p2)
-  const p3 = await findConfig('foo', t.context.p3)
-  const p4 = await findConfig('foo', t.context.p4)
-  const p5 = await findConfig('foo', t.context.p5)
-  const p6 = await findConfig('foo', t.context.p6)
-  const p7 = await findConfig('foo', t.context.p7)
-  const p8 = await findConfig('foo', t.context.p8)
-  const p9 = await findConfig('foo', t.context.p9)
-  const pRoot = await findConfig('foo', 'test/fixtures')
+test('findRc precedence', async t => {
+  const p1 = await findRc('foo', t.context.p1)
+  const p2 = await findRc('foo', t.context.p2)
+  const p3 = await findRc('foo', t.context.p3)
+  const p4 = await findRc('foo', t.context.p4)
+  const p5 = await findRc('foo', t.context.p5)
+  const p6 = await findRc('foo', t.context.p6)
+  const p7 = await findRc('foo', t.context.p7)
+  const p8 = await findRc('foo', t.context.p8)
+  const p9 = await findRc('foo', t.context.p9)
+  const pRoot = await findRc('foo', 'test/fixtures')
 
   t.is(p1, resolve(t.context.p1, '.foorc'))
   t.is(p2, resolve(t.context.p2, '.foorc.json'))
@@ -45,35 +45,35 @@ test('findConfig precedence', async t => {
   t.is(pRoot, resolve('test/fixtures', 'foo.config.js'))
 })
 
-test('findConfig not found', async t => {
-  const rcFile = await findConfig('foo')
+test('findRc not found', async t => {
+  const rcFile = await findRc('foo')
 
   t.is(rcFile, undefined)
 })
 
-test('loadConfig()', async t => {
-  const rc = await loadConfig('prettier')
+test('loadRc()', async t => {
+  const rc = await loadRc('prettier')
 
   t.deepEqual(rc, mock)
 })
 
-test('loadConfig cwd', async t => {
-  const rc = await loadConfig('foo', t.context.p1)
+test('loadRc cwd', async t => {
+  const rc = await loadRc('foo', t.context.p1)
 
   t.deepEqual(rc, mockFoo)
 })
 
-test('loadConfig precedence', async t => {
-  const p1 = await loadConfig('foo', t.context.p1)
-  const p2 = await loadConfig('foo', t.context.p2)
-  const p3 = await loadConfig('foo', t.context.p3)
-  const p4 = await loadConfig('foo', t.context.p4)
-  const p5 = await loadConfig('foo', t.context.p5)
-  const p6 = await loadConfig('foo', t.context.p6)
-  const p7 = await loadConfig('foo', t.context.p7)
-  const p8 = await loadConfig('foo', t.context.p8)
-  const p9 = await loadConfig('foo', t.context.p9)
-  const pRoot = await loadConfig('foo', 'test/fixtures')
+test('loadRc precedence', async t => {
+  const p1 = await loadRc('foo', t.context.p1)
+  const p2 = await loadRc('foo', t.context.p2)
+  const p3 = await loadRc('foo', t.context.p3)
+  const p4 = await loadRc('foo', t.context.p4)
+  const p5 = await loadRc('foo', t.context.p5)
+  const p6 = await loadRc('foo', t.context.p6)
+  const p7 = await loadRc('foo', t.context.p7)
+  const p8 = await loadRc('foo', t.context.p8)
+  const p9 = await loadRc('foo', t.context.p9)
+  const pRoot = await loadRc('foo', 'test/fixtures')
 
   t.deepEqual(p1, mockFoo)
   t.deepEqual(p2, mockFoo)
@@ -87,28 +87,28 @@ test('loadConfig precedence', async t => {
   t.deepEqual(pRoot, mockFoo)
 })
 
-test('loadConfig empty', async t => {
-  const rc = await loadConfig('bar')
+test('loadRc empty', async t => {
+  const rc = await loadRc('bar')
 
   t.deepEqual(rc, {})
 })
 
-test('loadConfig with args', async t => {
+test('loadRc with args', async t => {
   const foo = Foo.fromJSON(mockFoo)
-  const rc = await loadConfig('withargs', 'test/fixtures', foo)
+  const rc = await loadRc('withargs', 'test/fixtures', foo)
 
   t.deepEqual(rc, mockFoo)
 })
 
 test('throws invalid values', async t => {
-  await t.throwsAsync(loadConfig('invalid', 'test/fixtures'), {
+  await t.throwsAsync(loadRc('invalid', 'test/fixtures'), {
     instanceOf: TypeError,
     message: /Config must be a plain object/
   })
 })
 
 test('from package.json', async t => {
-  const rc = await loadConfig('foo')
+  const rc = await loadRc('foo')
 
   t.deepEqual(rc, { bar: 'bar', corge: { xyz: 123 } })
 })
@@ -118,7 +118,7 @@ test.serial("don't throws missing package.json", async t => {
   const cwdFn = process.cwd
   process.cwd = () => 'test/fixtures'
 
-  const rc = await loadConfig('foo')
+  const rc = await loadRc('foo')
 
   t.deepEqual(rc, {})
   // restore cwd

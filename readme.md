@@ -14,12 +14,12 @@ This package is pure ESM, please read the
 [esm-package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
 ```js
-import { findConfig, loadConfig } from 'rcfy'
+import { findRc, loadRc } from 'rcfy'
 
-const rcFile = await findConfig('myproject')
+const rcFile = await findRc('myproject')
 // => root/to/project/.myproject.js
 
-const rc = await loadConfig('myproject')
+const rc = await loadRc('myproject')
 // => { ... }
 ```
 
@@ -37,16 +37,16 @@ interface AnyConfig {
 
 ## API
 
-### findConfig
+### findRc
 
-▸ **findConfig**(`name`, `cwd?`): `Promise`<`string` \| `undefined`\>
+▸ **findRc**(`name`, `cwd?`): `Promise`<`string` \| `undefined`\>
 
 Finds runtime-configuration file.
 
 ```js
-import { findConfig } from 'rcfy'
+import { findRc } from 'rcfy'
 
-const rcFile = await findConfig('myproject', './config')
+const rcFile = await findRc('myproject', './config')
 // will finds:
 // - `.myprojectrc` file in the `./config` directory.
 // - `.myprojectrc.json` file in the `./config` directory.
@@ -68,16 +68,16 @@ const rcFile = await findConfig('myproject', './config')
 
 ---
 
-### loadConfig
+### loadRc
 
-▸ **loadConfig**(`name`, `cwd?`, ...`args`): `Promise`<AnyConfig\>
+▸ **loadRc**(`name`, `cwd?`, ...`args`): `Promise`<AnyConfig\>
 
 Finds runtime-configuration file, with precedence.
 
 ```js
-import { loadConfig } from 'rcfy'
+import { loadRc } from 'rcfy'
 
-const rc = await loadConfig('myproject')
+const rc = await loadRc('myproject')
 // will try to loads config from:
 // - `myproject` field in the `package.json` file.
 // - `.myprojectrc` file in the `cwd`.
@@ -104,16 +104,16 @@ higher precedence.
 
 ---
 
-### findConfigSync
+### findRcSync
 
-▸ **findConfigSync**(`name`, `cwd?`): `string` \| `undefined`
+▸ **findRcSync**(`name`, `cwd?`): `string` \| `undefined`
 
 Finds runtime-configuration file synchronously.
 
 ```js
-import { findConfigSync } from 'rcfy'
+import { findRcSync } from 'rcfy'
 
-const rcFile = findConfigSync('myproject', './config')
+const rcFile = findRcSync('myproject', './config')
 // will finds:
 // - `.myprojectrc` file in the `./config` directory.
 // - `.myprojectrc.json` file in the `./config` directory.
@@ -135,16 +135,16 @@ const rcFile = findConfigSync('myproject', './config')
 
 ---
 
-### loadConfigSync
+### loadRcSync
 
-▸ **loadConfigSync**(`name`, `cwd?`, ...`args`): AnyConfig \| `Promise`<AnyConfig\>
+▸ **loadRcSync**(`name`, `cwd?`, ...`args`): AnyConfig \| `Promise`<AnyConfig\>
 
 Loads runtime-configuration file synchronously, with precedence.
 
 ```js
-import { loadConfigSync } from 'rcfy'
+import { loadRcSync } from 'rcfy'
 
-const rc = loadConfigSync('myproject')
+const rc = loadRcSync('myproject')
 // will try to loads config from:
 // - `myproject` field in the `package.json` file.
 // - `.myprojectrc` file in the `cwd`.

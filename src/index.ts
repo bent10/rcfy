@@ -13,12 +13,12 @@
  * [esm-package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
  *
  * ```js
- * import { findConfig, loadConfig } from 'rcfy'
+ * import { findRc, loadRc } from 'rcfy'
  *
- * const rcFile = await findConfig('myproject')
+ * const rcFile = await findRc('myproject')
  * // => root/to/project/.myproject.js
  *
- * const rc = await loadConfig('myproject')
+ * const rc = await loadRc('myproject')
  * // => { ... }
  * ```
  *
