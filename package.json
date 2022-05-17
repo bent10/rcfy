@@ -39,7 +39,7 @@
     "coverage": "c8 -r lcov -r text npm test"
   },
   "dependencies": {
-    "loadee": "^2.1.1"
+    "loadee": "2.1.2"
   },
   "devDependencies": {
     "ava": "4.2.0",
