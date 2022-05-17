@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/bent10/rcfy/compare/v2.0.0...v2.0.1) (2022-05-17)
+
+
+### Bug Fixes
+
+* **windows:** fixed `ERR_UNSUPPORTED_ESM_URL_SCHEME` ([6fcf170](https://github.com/bent10/rcfy/commit/6fcf170203cb9807c606eecbc03b2a42ffc123c8))
+
 # [2.0.0](https://github.com/bent10/rcfy/compare/v1.0.2...v2.0.0) (2022-05-15)
 
 
