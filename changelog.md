@@ -1,3 +1,11 @@
+## [2.0.2](https://github.com/bent10/rcfy/compare/v2.0.1...v2.0.2) (2022-06-23)
+
+
+### Bug Fixes
+
+* **doogu:** refactor ([fea507c](https://github.com/bent10/rcfy/commit/fea507c79ffefb05453b2dc1988852a6ee805ab0))
+* resolves types error ([fee67b2](https://github.com/bent10/rcfy/commit/fee67b2c66b1cc7512db3b700538bd68fd969e88))
+
 ## [2.0.1](https://github.com/bent10/rcfy/compare/v2.0.0...v2.0.1) (2022-05-17)
 
 
