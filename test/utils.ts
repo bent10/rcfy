@@ -24,15 +24,20 @@ export const context = {
   p9: resolve('test/fixtures/p9')
 }
 
-// should be same as in .prettierrc
+// should be same as in .swcrc
 export const mock = {
-  arrowParens: 'avoid',
-  jsxSingleQuote: true,
-  semi: false,
-  singleQuote: true,
-  tabWidth: 2,
-  trailingComma: 'none',
-  vueIndentScriptAndStyle: false
+  $schema: 'https://json.schemastore.org/swcrc',
+  test: '.*.ts$',
+  jsc: {
+    parser: {
+      syntax: 'typescript'
+    },
+    target: 'es2019',
+    externalHelpers: true
+  },
+  module: {
+    type: 'es6'
+  }
 }
 
 export const mockFoo = {

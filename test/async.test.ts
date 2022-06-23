@@ -10,9 +10,9 @@ test.before(t => {
 })
 
 test('findRc()', async t => {
-  const rcFile = await findRc('prettier')
+  const rcFile = await findRc('swc')
 
-  t.is(rcFile, resolve(process.cwd(), '.prettierrc'))
+  t.is(rcFile, resolve(process.cwd(), '.swcrc'))
 })
 
 test('findRc cwd', async t => {
@@ -52,7 +52,7 @@ test('findRc not found', async t => {
 })
 
 test('loadRc()', async t => {
-  const rc = await loadRc('prettier')
+  const rc = await loadRc('swc')
 
   t.deepEqual(rc, mock)
 })

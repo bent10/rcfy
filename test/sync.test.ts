@@ -10,9 +10,9 @@ test.before(t => {
 })
 
 test('findRcSync()', t => {
-  const rcFile = findRcSync('prettier')
+  const rcFile = findRcSync('swc')
 
-  t.is(rcFile, resolve(process.cwd(), '.prettierrc'))
+  t.is(rcFile, resolve(process.cwd(), '.swcrc'))
 })
 
 test('findRcSync cwd', t => {
@@ -52,7 +52,7 @@ test('findRcSync not found', t => {
 })
 
 test('loadRcSync()', t => {
-  const rc = loadRcSync('prettier')
+  const rc = loadRcSync('swc')
 
   t.deepEqual(rc, mock)
 })
