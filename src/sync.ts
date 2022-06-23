@@ -71,11 +71,11 @@ export function findRcSync(
 export function loadRcSync(
   name: string,
   cwd = process.cwd(),
-  ...args: any[]
+  ...args: unknown[]
 ): AnyConfig | Promise<AnyConfig> {
   const pkgConfig = readPkgSync(name)
   const configFile = findRcSync(name, cwd)
-  let config = configFile ? loadFileSync(configFile, cwd, ...args) : {}
+  const config = configFile ? loadFileSync(configFile, cwd, ...args) : {}
 
   if (
     typeof config !== 'object' ||

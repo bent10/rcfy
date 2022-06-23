@@ -81,7 +81,7 @@ export async function findRc(
 export async function loadRc(
   name: string,
   cwd = process.cwd(),
-  ...args: any[]
+  ...args: unknown[]
 ): Promise<AnyConfig> {
   const pkgConfig = await readPkg(name)
   const configFile = await findRc(name, cwd)
