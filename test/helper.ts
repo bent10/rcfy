@@ -1,17 +1,5 @@
 import { resolve } from 'node:path'
 
-export type Context = {
-  p1: string
-  p2: string
-  p3: string
-  p4: string
-  p5: string
-  p6: string
-  p7: string
-  p8: string
-  p9: string
-}
-
 export const context = {
   p1: resolve('test/fixtures/p1'),
   p2: resolve('test/fixtures/p2'),
@@ -25,7 +13,7 @@ export const context = {
 }
 
 // should be same as in .swcrc
-export const mock = {
+export const swcData = {
   $schema: 'https://json.schemastore.org/swcrc',
   test: '.*.ts$',
   jsc: {
@@ -40,11 +28,17 @@ export const mock = {
   }
 }
 
-export const mockFoo = {
+export const fooData = {
   bar: 'bar', // => overrides from package.json
   baz: 87,
   qux: true,
   corge: { xyz: 123 } // => added from package.json
+}
+
+export const fooRcData = {
+  bar: 'lorem ipsum',
+  baz: 87,
+  qux: true
 }
 
 // to pass as args

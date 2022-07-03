@@ -1,126 +1,128 @@
 import { resolve } from 'node:path'
-import anyTest, { TestFn } from 'ava'
 import { findRc, loadRc } from '../dist/index.js'
-import { mock, mockFoo, Foo, context, type Context } from './utils.js'
+import { swcData, fooRcData, Foo, context } from './helper.js'
 
-const test = anyTest as TestFn<Context>
+describe('#findRc()', () => {
+  it('found rc file', async () => {
+    const rcFile = await findRc('swc')
 
-test.before(t => {
-  t.context = context
-})
+    expect(rcFile).toBe(resolve(process.cwd(), '.swcrc'))
+  })
 
-test('findRc()', async t => {
-  const rcFile = await findRc('swc')
+  it('should not looks for package.json', async () => {
+    // as we have `foo` field in package.json
+    const rcFile = await findRc('foo')
 
-  t.is(rcFile, resolve(process.cwd(), '.swcrc'))
-})
+    expect(rcFile).toBeUndefined()
+  })
 
-test('findRc cwd', async t => {
-  const rcFile = await findRc('foo', t.context.p1)
+  it('returns undefined if no rc files', async () => {
+    const rcFile = await findRc('bar')
 
-  t.is(rcFile, resolve(t.context.p1, '.foorc'))
-})
+    expect(rcFile).toBeUndefined()
+  })
 
-test('findRc precedence', async t => {
-  const p1 = await findRc('foo', t.context.p1)
-  const p2 = await findRc('foo', t.context.p2)
-  const p3 = await findRc('foo', t.context.p3)
-  const p4 = await findRc('foo', t.context.p4)
-  const p5 = await findRc('foo', t.context.p5)
-  const p6 = await findRc('foo', t.context.p6)
-  const p7 = await findRc('foo', t.context.p7)
-  const p8 = await findRc('foo', t.context.p8)
-  const p9 = await findRc('foo', t.context.p9)
-  const pRoot = await findRc('foo', 'test/fixtures')
+  test('allows custom cwd', async () => {
+    const rcFile = await findRc('foo', context.p1)
 
-  t.is(p1, resolve(t.context.p1, '.foorc'))
-  t.is(p2, resolve(t.context.p2, '.foorc.json'))
-  t.is(p3, resolve(t.context.p3, '.foorc.yaml'))
-  t.is(p4, resolve(t.context.p4, '.foorc.yml'))
-  t.is(p5, resolve(t.context.p5, '.foo.mjs'))
-  t.is(p6, resolve(t.context.p6, '.foo.js'))
-  t.is(p7, resolve(t.context.p7, '.foo.js'))
-  t.is(p8, resolve(t.context.p8, 'foo.config.mjs'))
-  t.is(p9, resolve(t.context.p9, 'foo.config.js'))
-  t.is(pRoot, resolve('test/fixtures', 'foo.config.js'))
-})
+    expect(rcFile).toBe(resolve(context.p1, '.foorc'))
+  })
 
-test('findRc not found', async t => {
-  const rcFile = await findRc('foo')
+  it('should find with precedence', async () => {
+    const p1 = await findRc('foo', context.p1)
+    const p2 = await findRc('foo', context.p2)
+    const p3 = await findRc('foo', context.p3)
+    const p4 = await findRc('foo', context.p4)
+    const p5 = await findRc('foo', context.p5)
+    const p6 = await findRc('foo', context.p6)
+    const p7 = await findRc('foo', context.p7)
+    const p8 = await findRc('foo', context.p8)
+    const p9 = await findRc('foo', context.p9)
+    const pRoot = await findRc('foo', 'test/fixtures')
 
-  t.is(rcFile, undefined)
-})
-
-test('loadRc()', async t => {
-  const rc = await loadRc('swc')
-
-  t.deepEqual(rc, mock)
-})
-
-test('loadRc cwd', async t => {
-  const rc = await loadRc('foo', t.context.p1)
-
-  t.deepEqual(rc, mockFoo)
-})
-
-test('loadRc precedence', async t => {
-  const p1 = await loadRc('foo', t.context.p1)
-  const p2 = await loadRc('foo', t.context.p2)
-  const p3 = await loadRc('foo', t.context.p3)
-  const p4 = await loadRc('foo', t.context.p4)
-  const p5 = await loadRc('foo', t.context.p5)
-  const p6 = await loadRc('foo', t.context.p6)
-  const p7 = await loadRc('foo', t.context.p7)
-  const p8 = await loadRc('foo', t.context.p8)
-  const p9 = await loadRc('foo', t.context.p9)
-  const pRoot = await loadRc('foo', 'test/fixtures')
-
-  t.deepEqual(p1, mockFoo)
-  t.deepEqual(p2, mockFoo)
-  t.deepEqual(p3, mockFoo)
-  t.deepEqual(p4, mockFoo)
-  t.deepEqual(p5, mockFoo)
-  t.deepEqual(p6, mockFoo)
-  t.deepEqual(p7, mockFoo)
-  t.deepEqual(p8, mockFoo)
-  t.deepEqual(p9, mockFoo)
-  t.deepEqual(pRoot, mockFoo)
-})
-
-test('loadRc empty', async t => {
-  const rc = await loadRc('bar')
-
-  t.deepEqual(rc, {})
-})
-
-test('loadRc with args', async t => {
-  const foo = Foo.fromJSON(mockFoo)
-  const rc = await loadRc('withargs', 'test/fixtures', foo)
-
-  t.deepEqual(rc, mockFoo)
-})
-
-test('throws invalid values', async t => {
-  await t.throwsAsync(loadRc('invalid', 'test/fixtures'), {
-    instanceOf: TypeError,
-    message: /Config must be a plain object/
+    expect(p1).toBe(resolve(context.p1, '.foorc'))
+    expect(p2).toBe(resolve(context.p2, '.foorc.json'))
+    expect(p3).toBe(resolve(context.p3, '.foorc.yaml'))
+    expect(p4).toBe(resolve(context.p4, '.foorc.yml'))
+    expect(p5).toBe(resolve(context.p5, '.foo.mjs'))
+    expect(p6).toBe(resolve(context.p6, '.foo.js'))
+    expect(p7).toBe(resolve(context.p7, '.foo.js'))
+    expect(p8).toBe(resolve(context.p8, 'foo.config.mjs'))
+    expect(p9).toBe(resolve(context.p9, 'foo.config.js'))
+    expect(pRoot).toBe(resolve('test/fixtures', 'foo.config.js'))
   })
 })
 
-test('from package.json', async t => {
-  const rc = await loadRc('foo')
+describe('#loadRc()', () => {
+  it('from package.json', async () => {
+    const rc = await loadRc('foo')
 
-  t.deepEqual(rc, { bar: 'bar', corge: { xyz: 123 } })
-})
+    expect(rc).toEqual({ bar: 'bar', corge: { xyz: 123 } })
+  })
 
-test.serial("don't throws missing package.json", async t => {
-  // mock cwd
-  const cwdFn = process.cwd
-  process.cwd = () => 'test/fixtures'
+  it('dont throws missing package.json', async () => {
+    const rc = await loadRc('foo', 'test/fixtures')
 
-  const rc = await loadRc('foo')
+    expect(rc).toEqual({
+      bar: 'lorem ipsum',
+      baz: 87,
+      qux: true
+    })
+  })
 
-  t.deepEqual(rc, {})
-  // restore cwd
-  process.cwd = cwdFn
+  it('from rc file', async () => {
+    const rc = await loadRc('swc')
+
+    expect(rc).toEqual(swcData)
+  })
+
+  it('returns empty object if no rc', async () => {
+    const rc = await loadRc('bar')
+
+    expect(rc).toEqual({})
+  })
+
+  it('allows rc ...args', async () => {
+    const foo = Foo.fromJSON(fooRcData)
+    const rc = await loadRc('withargs', 'test/fixtures', foo)
+
+    expect(rc).toEqual(fooRcData)
+  })
+
+  it('allows custom cwd', async () => {
+    const rc = await loadRc('foo', context.p1)
+
+    expect(rc).toEqual(fooRcData)
+  })
+
+  it('should load with precedence', async () => {
+    const p1 = await loadRc('foo', context.p1)
+    const p2 = await loadRc('foo', context.p2)
+    const p3 = await loadRc('foo', context.p3)
+    const p4 = await loadRc('foo', context.p4)
+    const p5 = await loadRc('foo', context.p5)
+    const p6 = await loadRc('foo', context.p6)
+    const p7 = await loadRc('foo', context.p7)
+    const p8 = await loadRc('foo', context.p8)
+    const p9 = await loadRc('foo', context.p9)
+    const pRoot = await loadRc('foo', 'test/fixtures')
+
+    expect(p1).toEqual(fooRcData)
+    expect(p2).toEqual(fooRcData)
+    expect(p3).toEqual(fooRcData)
+    expect(p4).toEqual(fooRcData)
+    expect(p5).toEqual(fooRcData)
+    expect(p6).toEqual(fooRcData)
+    expect(p7).toEqual(fooRcData)
+    expect(p8).toEqual(fooRcData)
+    expect(p9).toEqual(fooRcData)
+    expect(pRoot).toEqual(fooRcData)
+  })
+
+  it('throws invalid values', async () => {
+    // TypeError: Config must be a plain object...
+    await expect(loadRc('invalid', 'test/fixtures')).rejects.toThrowError(
+      /Config must be a plain object/
+    )
+  })
 })

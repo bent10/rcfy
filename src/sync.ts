@@ -5,10 +5,12 @@ import { AnyConfig } from './types.js'
 
 /**
  * Returns config object from `package.json` file, if it exists.
+ *
+ * @internal
  */
-function readPkgSync(prop: string): AnyConfig | undefined {
+function readPkgSync(prop: string, cwd: string): AnyConfig | undefined {
   try {
-    return (loadFileSync('package.json') as AnyConfig)[prop]
+    return (loadFileSync('package.json', cwd) as AnyConfig)[prop]
   } catch {
     return
   }
@@ -73,7 +75,7 @@ export function loadRcSync(
   cwd = process.cwd(),
   ...args: unknown[]
 ): AnyConfig | Promise<AnyConfig> {
-  const pkgConfig = readPkgSync(name)
+  const pkgConfig = readPkgSync(name, cwd)
   const configFile = findRcSync(name, cwd)
   const config = configFile ? loadFileSync(configFile, cwd, ...args) : {}
 

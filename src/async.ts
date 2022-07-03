@@ -5,10 +5,15 @@ import { AnyConfig } from './types.js'
 
 /**
  * Returns config object from `package.json` file, if it exists.
+ *
+ * @internal
  */
-async function readPkg(prop: string): Promise<AnyConfig | undefined> {
+async function readPkg(
+  prop: string,
+  cwd: string
+): Promise<AnyConfig | undefined> {
   try {
-    return ((await loadFile('package.json')) as AnyConfig)[prop]
+    return ((await loadFile('package.json', cwd)) as AnyConfig)[prop]
   } catch {
     return
   }
@@ -83,7 +88,7 @@ export async function loadRc(
   cwd = process.cwd(),
   ...args: unknown[]
 ): Promise<AnyConfig> {
-  const pkgConfig = await readPkg(name)
+  const pkgConfig = await readPkg(name, cwd)
   const configFile = await findRc(name, cwd)
   const config = configFile ? await loadFile(configFile, cwd, ...args) : {}
 
