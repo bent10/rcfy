@@ -1,6 +1,13 @@
 import { resolve } from 'node:path'
+import { jest } from '@jest/globals'
 import { findRc, loadRc } from '../dist/index.js'
 import { swcData, fooRcData, Foo, context } from './helper.js'
+
+beforeEach(() => {
+  // this is resolves the error (on ci) below for wtf reason.
+  // ReferenceError: You are trying to `import` a file after the Jest environment has been torn down.
+  jest.useFakeTimers()
+})
 
 describe('#findRc()', () => {
   it('found rc file', async () => {
