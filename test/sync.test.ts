@@ -1,7 +1,7 @@
 import { resolve } from 'node:path'
 import { jest } from '@jest/globals'
-import { findRcSync, loadRcSync } from '../dist/index.js'
-import { swcData, fooRcData, Foo, context } from './helper.js'
+import { findRcSync, loadRcSync } from '../dist/index'
+import { swcData, fooRcData, Foo, context } from './utils'
 
 beforeEach(() => {
   // this is resolves the error (on ci) below for wtf reason.

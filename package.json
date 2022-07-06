@@ -57,9 +57,6 @@
         "@swc/jest"
       ]
     },
-    "moduleNameMapper": {
-      "^./helper.js$": "<rootDir>/test/helper.ts"
-    },
     "extensionsToTreatAsEsm": [
       ".ts"
     ],
@@ -67,7 +64,12 @@
       "<rootDir>/test/fixtures"
     ],
     "clearMocks": true,
-    "coverageDirectory": "coverage"
+    "coverageDirectory": "coverage",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/(index|types).js",
+      "/test/"
+    ]
   },
   "release": {
     "branches": [
