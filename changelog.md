@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/bent10/rcfy/compare/v2.0.3...v2.0.4) (2022-07-06)
+
+
+### Bug Fixes
+
+* omit `engines` field ([a26ff3f](https://github.com/bent10/rcfy/commit/a26ff3f2f67699bb0316c6777410b41b25470ac8))
+
 ## [2.0.3](https://github.com/bent10/rcfy/compare/v2.0.2...v2.0.3) (2022-06-25)
 
 
