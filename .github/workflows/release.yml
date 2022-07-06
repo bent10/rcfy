@@ -25,6 +25,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+      - run: npx jest --clearCache
       - run: npm test
 
       - name: Installing release dependencies

@@ -52,6 +52,7 @@
   },
   "prettier": "doogu/config/prettier.json",
   "jest": {
+    "testEnvironment": "jest-environment-node",
     "transform": {
       "^.*.ts$": [
         "@swc/jest"
