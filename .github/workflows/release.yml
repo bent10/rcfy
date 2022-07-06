@@ -26,7 +26,8 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npx jest --clearCache
-      - run: npm test
+      - run: npm test -- test/async.test.ts
+      - run: npm test -- test/sync.test.ts
 
       - name: Installing release dependencies
         run: |

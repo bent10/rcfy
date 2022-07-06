@@ -51,6 +51,26 @@
     "extends": "./node_modules/doogu/config/eslint.json"
   },
   "prettier": "doogu/config/prettier.json",
+  "jest": {
+    "testEnvironment": "jest-environment-node",
+    "transform": {
+      "^.*.ts$": [
+        "@swc/jest"
+      ]
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "watchPathIgnorePatterns": [
+      "<rootDir>/test/fixtures"
+    ],
+    "coverageDirectory": "coverage",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/(index|types).js",
+      "/test/"
+    ]
+  },
   "release": {
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
