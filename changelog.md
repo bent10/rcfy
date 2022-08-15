@@ -1,3 +1,10 @@
+## [2.0.7](https://github.com/bent10/rcfy/compare/v2.0.6...v2.0.7) (2022-08-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency loadee to ^2.1.6 ([0ebcd83](https://github.com/bent10/rcfy/commit/0ebcd8309235f623918bba6b778eac8d3c37acd0))
+
 ## [2.0.6](https://github.com/bent10/rcfy/compare/v2.0.5...v2.0.6) (2022-08-15)
 
 
