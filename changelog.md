@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/bent10/rcfy/compare/v2.0.5...v2.0.6) (2022-08-15)
+
+
+### Bug Fixes
+
+* external helpers ([8983fd5](https://github.com/bent10/rcfy/commit/8983fd5fe2c1b43ebf8bd15dfa4c7e0a32698a77))
+
 ## [2.0.5](https://github.com/bent10/rcfy/compare/v2.0.4...v2.0.5) (2022-07-06)
 
 
