@@ -20,8 +20,7 @@ export const swcData = {
     parser: {
       syntax: 'typescript'
     },
-    target: 'es2019',
-    externalHelpers: true
+    target: 'es2019'
   },
   module: {
     type: 'es6'
