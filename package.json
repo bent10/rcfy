@@ -37,7 +37,7 @@
     "coverage": "npm test -- --coverage"
   },
   "dependencies": {
-    "loadee": "^2.1.5"
+    "loadee": "^2.1.6"
   },
   "devDependencies": {
     "doogu": "^2.3.25"
