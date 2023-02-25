@@ -40,7 +40,7 @@
     "loadee": "^2.1.6"
   },
   "devDependencies": {
-    "doogu": "^2.4.76"
+    "doogu": "^2.4.77"
   },
   "config": {
     "commitizen": {
