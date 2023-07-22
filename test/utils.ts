@@ -12,21 +12,6 @@ export const context = {
   p9: resolve('test/fixtures/p9')
 }
 
-// should be same as in .swcrc
-export const swcData = {
-  $schema: 'https://json.schemastore.org/swcrc',
-  test: '.*.ts$',
-  jsc: {
-    parser: {
-      syntax: 'typescript'
-    },
-    target: 'es2019'
-  },
-  module: {
-    type: 'es6'
-  }
-}
-
 export const fooData = {
   bar: 'bar', // => overrides from package.json
   baz: 87,
@@ -54,11 +39,13 @@ export class Foo {
     this.corge = corge
   }
 
-  static fromJSON(json: any): Foo {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static fromJSON(json: Record<string, any>): Foo {
     return new Foo(json.bar, json.baz, json.qux, json.corge)
   }
 
-  toJSON(): any {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  toJSON(): Record<string, any> {
     return {
       bar: this.bar,
       baz: this.baz,

@@ -18,9 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 16.10.0
-          - 14.17
-          - 12.22
+          - 16.10.0 # required by @typescript-eslint/eslint-plugin
         os:
           - ubuntu-latest
           - windows-latest
@@ -31,7 +29,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run lint
-      - run: npm run build
-      - run: npx jest --clearCache
-      - run: npm test -- test/async.test.ts
-      - run: npm test -- test/sync.test.ts
+      - run: npm test

@@ -1,12 +1,12 @@
 import { resolve } from 'node:path'
-import { findRc, loadRc } from '../dist/async'
-import { swcData, fooRcData, Foo, context } from './utils'
+import { findRc, loadRc } from '../src/index.js'
+import { fooRcData, Foo, context } from './utils.js'
 
 describe('#findRc()', () => {
   it('found rc file', async () => {
-    const rcFile = await findRc('swc')
+    const rcFile = await findRc('foo', 'test/fixtures')
 
-    expect(rcFile).toBe(resolve(process.cwd(), '.swcrc'))
+    expect(rcFile).toBe(resolve(process.cwd(), 'test/fixtures/foo.config.js'))
   })
 
   it('should not looks for package.json', async () => {
@@ -55,9 +55,9 @@ describe('#findRc()', () => {
 
 describe('#loadRc()', () => {
   it('from package.json', async () => {
-    const rc = await loadRc('foo')
+    const rc = await loadRc('eslintConfig')
 
-    expect(rc).toEqual({ bar: 'bar', corge: { xyz: 123 } })
+    expect(rc).toEqual({ extends: './node_modules/doogu/eslint' })
   })
 
   it('dont throws missing package.json', async () => {
@@ -68,12 +68,6 @@ describe('#loadRc()', () => {
       baz: 87,
       qux: true
     })
-  })
-
-  it('from rc file', async () => {
-    const rc = await loadRc('swc')
-
-    expect(rc).toEqual(swcData)
   })
 
   it('returns empty object if no rc', async () => {

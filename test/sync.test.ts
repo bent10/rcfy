@@ -1,19 +1,18 @@
 import { resolve } from 'node:path'
-import { jest } from '@jest/globals'
-import { findRcSync, loadRcSync } from '../dist/index'
-import { swcData, fooRcData, Foo, context } from './utils'
+import { findRcSync, loadRcSync } from '../src/index.js'
+import { fooRcData, Foo, context } from './utils.js'
 
 beforeEach(() => {
   // this is resolves the error (on ci) below for wtf reason.
   // ReferenceError: You are trying to `import` a file after the Jest environment has been torn down.
-  jest.useFakeTimers()
+  vitest.useFakeTimers()
 })
 
 describe('#findRc()', () => {
   it('found rc file', () => {
-    const rcFile = findRcSync('swc')
+    const rcFile = findRcSync('foo', 'test/fixtures')
 
-    expect(rcFile).toBe(resolve(process.cwd(), '.swcrc'))
+    expect(rcFile).toBe(resolve(process.cwd(), 'test/fixtures/foo.config.cjs'))
   })
 
   it('should not looks for package.json', () => {
@@ -62,9 +61,9 @@ describe('#findRc()', () => {
 
 describe('#loadRc()', () => {
   it('from package.json', () => {
-    const rc = loadRcSync('foo')
+    const rc = loadRcSync('eslintConfig')
 
-    expect(rc).toEqual({ bar: 'bar', corge: { xyz: 123 } })
+    expect(rc).toEqual({ extends: './node_modules/doogu/eslint' })
   })
 
   it('dont throws missing package.json', () => {
@@ -75,12 +74,6 @@ describe('#loadRc()', () => {
       baz: 87,
       qux: true
     })
-  })
-
-  it('from rc file', () => {
-    const rc = loadRcSync('swc')
-
-    expect(rc).toEqual(swcData)
   })
 
   it('returns empty object if no rc', () => {
