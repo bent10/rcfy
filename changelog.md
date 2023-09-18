@@ -1,3 +1,10 @@
+## [2.0.8](https://github.com/bent10/rcfy/compare/v2.0.7...v2.0.8) (2023-09-18)
+
+
+### Bug Fixes
+
+* **release:** add build files ([01d83f0](https://github.com/bent10/rcfy/commit/01d83f0bbddea39d459a15bba0f56c75e11542af))
+
 ## [2.0.7](https://github.com/bent10/rcfy/compare/v2.0.6...v2.0.7) (2022-08-15)
 
 ### Bug Fixes
