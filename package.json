@@ -39,10 +39,10 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "loadee": "^2.1.6"
+    "loadee": "^2.3.1"
   },
   "devDependencies": {
-    "doogu": "3.2.8"
+    "doogu": "3.2.10"
   },
   "config": {
     "commitizen": {
