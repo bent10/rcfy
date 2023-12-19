@@ -1,3 +1,10 @@
+## [2.0.9](https://github.com/bent10/rcfy/compare/v2.0.8...v2.0.9) (2023-12-19)
+
+
+### Bug Fixes
+
+* **deps:** ncu ([2268a31](https://github.com/bent10/rcfy/commit/2268a312971ea61b4e0ecee3ef9f0cb0401df270))
+
 ## [2.0.8](https://github.com/bent10/rcfy/compare/v2.0.7...v2.0.8) (2023-09-18)
 
 
