@@ -1,3 +1,10 @@
+## [2.0.10](https://github.com/bent10/rcfy/compare/v2.0.9...v2.0.10) (2024-02-03)
+
+
+### Bug Fixes
+
+* **deps:** update loadee to `v3.0.1` ([6d186b4](https://github.com/bent10/rcfy/commit/6d186b4970139628325f40a76abd01e65e8048a9))
+
 ## [2.0.9](https://github.com/bent10/rcfy/compare/v2.0.8...v2.0.9) (2023-12-19)
 
 
