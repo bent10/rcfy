@@ -1,1 +1,1 @@
-exports.module = async () => []
+exports.default = async () => []

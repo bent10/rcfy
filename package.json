@@ -32,14 +32,14 @@
     "start": "npm run dev",
     "dev": "npm run types && vite build --emptyOutDir=false --watch",
     "build": "vite build && npm run types",
-    "test": "vitest --ui",
+    "test": "vitest",
     "coverage": "vitest run --coverage",
     "types": "tsc src/*.ts -d --emitDeclarationOnly --outDir ./dist",
     "lint": "tsc --noEmit && eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
-    "loadee": "^2.3.1"
+    "loadee": "^3.0.1"
   },
   "devDependencies": {
     "doogu": "3.2.10"

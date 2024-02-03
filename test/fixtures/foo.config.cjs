@@ -1,4 +1,4 @@
-exports.module = {
+exports.default = {
   bar: 'lorem ipsum',
   baz: 87,
   qux: true

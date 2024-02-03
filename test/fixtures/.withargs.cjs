@@ -1,3 +1,3 @@
-exports.module = function (foo) {
+exports.default = function (foo) {
   return foo.toJSON()
 }

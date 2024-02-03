@@ -1,4 +1,4 @@
-exports.module = () => {
+exports.default = () => {
   return {
     bar: 'lorem ipsum',
     baz: 87,

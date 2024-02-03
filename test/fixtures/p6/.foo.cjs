@@ -1,4 +1,4 @@
-exports.module = async () => {
+exports.default = async () => {
   return {
     bar: 'lorem ipsum',
     baz: 87,
