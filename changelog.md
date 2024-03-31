@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/bent10/rcfy/compare/v2.0.10...v2.1.0) (2024-03-31)
+
+
+### Features
+
+* add support for generic types ([992b81a](https://github.com/bent10/rcfy/commit/992b81a0f26d57571bd9f5c90e9b4d359ae8bdfe))
+
 ## [2.0.10](https://github.com/bent10/rcfy/compare/v2.0.9...v2.0.10) (2024-02-03)
 
 
