@@ -1,18 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { resolve } from 'node:path'
 import { loadFileSync } from 'loadee'
 import { isExistsSync } from './utils.js'
-import { AnyConfig } from './types.js'
 
 /**
  * Returns config object from `package.json` file, if it exists.
  *
  * @internal
  */
-function readPkgSync(prop: string, cwd: string): AnyConfig | undefined {
+function readPkgSync<T = any>(prop: string, cwd: string): T {
   try {
-    return (loadFileSync('package.json', cwd) as AnyConfig)[prop]
+    return loadFileSync<T>('package.json', cwd)[prop as never]
   } catch {
-    return
+    return <T>{}
   }
 }
 
@@ -70,12 +70,12 @@ export function findRcSync(
  * **Note:** Config that found in the `package.json` will be merged with
  * higher precedence.
  */
-export function loadRcSync(
+export function loadRcSync<T = any>(
   name: string,
   cwd = process.cwd(),
   ...args: unknown[]
-): AnyConfig | Promise<AnyConfig> {
-  const pkgConfig = readPkgSync(name, cwd)
+): T | Promise<T> {
+  const pkgConfig = readPkgSync<T>(name, cwd)
   const configFile = findRcSync(name, cwd)
   const config = configFile ? loadFileSync(configFile, cwd, ...args) : {}
 

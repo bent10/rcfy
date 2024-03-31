@@ -1,21 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { resolve } from 'node:path'
 import { loadFile } from 'loadee'
 import { isExists } from './utils.js'
-import { AnyConfig } from './types.js'
 
 /**
  * Returns config object from `package.json` file, if it exists.
  *
  * @internal
  */
-async function readPkg(
-  prop: string,
-  cwd: string
-): Promise<AnyConfig | undefined> {
+async function readPkg<T = any>(prop: string, cwd: string): Promise<T> {
   try {
-    return ((await loadFile('package.json', cwd)) as AnyConfig)[prop]
+    return (await loadFile('package.json', cwd))[prop as never]
   } catch {
-    return
+    return <T>{}
   }
 }
 
@@ -65,7 +62,7 @@ export async function findRc(
 }
 
 /**
- * Finds runtime-configuration file, with precedence.
+ * Loads runtime-configuration file, with precedence.
  *
  * ```js
  * import { loadRc } from 'rcfy'
@@ -83,12 +80,12 @@ export async function findRc(
  * **Note:** Config that found in the `package.json` will be merged with
  * higher precedence.
  */
-export async function loadRc(
+export async function loadRc<T = any>(
   name: string,
   cwd = process.cwd(),
   ...args: unknown[]
-): Promise<AnyConfig> {
-  const pkgConfig = await readPkg(name, cwd)
+): Promise<T> {
+  const pkgConfig = await readPkg<T>(name, cwd)
   const configFile = await findRc(name, cwd)
   const config = configFile ? await loadFile(configFile, cwd, ...args) : {}
 

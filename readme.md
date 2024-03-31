@@ -6,6 +6,8 @@ Finds and loads runtime-configuration file for the current project, with precede
 
 ```bash
 npm i rcfy
+# or
+yarn add rcfy
 ```
 
 ## Usage
@@ -22,18 +24,6 @@ const rcFile = await findRc('myproject')
 const rc = await loadRc('myproject')
 // => { ... }
 ```
-
-<details>
-<summary>`AnyConfig` interface</summary>
-
-```ts
-interface AnyConfig {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
-}
-```
-
-</details>
 
 ## API
 
@@ -70,9 +60,9 @@ const rcFile = await findRc('myproject', './config')
 
 ### loadRc
 
-▸ **loadRc**(`name`, `cwd?`, ...`args`): `Promise`<AnyConfig\>
+▸ **loadRc**<`T` = `any`\>(`name`, `cwd?`, ...`args`): `Promise`<`T`\>
 
-Finds runtime-configuration file, with precedence.
+Loads runtime-configuration file, with precedence.
 
 ```js
 import { loadRc } from 'rcfy'
@@ -100,7 +90,7 @@ higher precedence.
 
 #### Returns
 
-`Promise`<AnyConfig\>
+`Promise`<`T`\>
 
 ---
 
@@ -137,7 +127,7 @@ const rcFile = findRcSync('myproject', './config')
 
 ### loadRcSync
 
-▸ **loadRcSync**(`name`, `cwd?`, ...`args`): AnyConfig \| `Promise`<AnyConfig\>
+▸ **loadRcSync**<`T` = `any`\>(`name`, `cwd?`, ...`args`): `T` \| `Promise`<`T`\>
 
 Loads runtime-configuration file synchronously, with precedence.
 
@@ -167,82 +157,11 @@ higher precedence.
 
 #### Returns
 
-AnyConfig \| `Promise`<AnyConfig\>
+`T` \| `Promise`<`T`\>
 
----
+## Related
 
-### loadFile
-
-▸ **loadFile**(`pathlike`, `cwd?`, ...`args`): `Promise`<`PlainObject` \| `unknown`\>
-
-Resolves data from `yaml`, `json`, or `js` files.
-
-The `js` module will be normalize to either a plain object, string, number,
-boolean, null or undefined.
-
-```js
-import { loadFile } from 'loadee'
-
-const fromJson = await loadFile('data.json')
-// => { ... }
-const fromYaml = await loadFile('data.yaml')
-// => { ... }
-const fromJs = await loadFile('data.js')
-// => { ... } or unknown
-const fromCjs = await loadFile('data.cjs')
-// => { ... } or unknown
-```
-
-#### Parameters
-
-| Name       | Type        |
-| :--------- | :---------- |
-| `pathlike` | `PathLike`  |
-| `cwd?`     | `string`    |
-| `...args`  | `unknown`[] |
-
-#### Returns
-
-`Promise`<`PlainObject` \| `unknown`\>
-
----
-
-### loadFileSync
-
-▸ **loadFileSync**(`pathlike`, `cwd?`, ...`args`): `PlainObject` \| `unknown`
-
-Resolves data from `yaml`, `json`, or `js` files synchronously.
-
-The `js` module will be normalize to either a plain object, string, number,
-boolean, null or undefined.
-
-> **NOTE:** This function cannot be used to load ES modules. The `.js`
-> file will treated as CommonJS.
-
-```js
-import { loadFileSync } from 'loadee'
-
-const fromJsonSync = loadFileSync('data.json')
-// => { ... }
-const fromYamlSync = loadFileSync('data.yaml')
-// => { ... }
-const fromJsSync = loadFileSync('data.js')
-// => { ... } or unknown
-```
-
-#### Parameters
-
-| Name       | Type        |
-| :--------- | :---------- |
-| `pathlike` | `PathLike`  |
-| `cwd?`     | `string`    |
-| `...args`  | `unknown`[] |
-
-#### Returns
-
-`PlainObject` \| `unknown`
-
----
+- [`loadee`](https://github.com/bent10/loadee) – A utility to simplify the loading of YAML, JSON, and JS files.
 
 ## Contributing
 
@@ -264,4 +183,4 @@ git add . && git cz
 
 ![GitHub](https://img.shields.io/github/license/bent10/rcfy)
 
-A project by [Stilearning](https://stilearning.com) &copy; 2022-2023.
+A project by [Stilearning](https://stilearning.com) &copy; 2022-2024.
