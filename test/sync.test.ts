@@ -1,3 +1,5 @@
+/// <reference types="vitest/globals" />
+
 import { resolve } from 'node:path'
 import { findRcSync, loadRcSync } from '../src/index.js'
 import { fooRcData, Foo, context } from './utils.js'
@@ -61,9 +63,9 @@ describe('#findRc()', () => {
 
 describe('#loadRc()', () => {
   it('from package.json', () => {
-    const rc = loadRcSync('eslintConfig')
+    const rc = loadRcSync('release')
 
-    expect(rc).toEqual({ extends: './node_modules/doogu/eslint' })
+    expect(rc).toEqual({ extends: 'doogu/release.config.js' })
   })
 
   it('dont throws missing package.json', () => {
