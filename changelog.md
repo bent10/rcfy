@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/bent10/rcfy/compare/v2.1.0...v2.1.1) (2024-08-28)
+
+
+### Bug Fixes
+
+* **deps:** update `doogu` to `v4.0.4` ([af01b5a](https://github.com/bent10/rcfy/commit/af01b5aa17efc999f6e3f35fa38f2957c7841c2d))
+
 # [2.1.0](https://github.com/bent10/rcfy/compare/v2.0.10...v2.1.0) (2024-03-31)
 
 
